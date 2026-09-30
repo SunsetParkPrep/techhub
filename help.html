@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Tech help · Sunset Park Prep</title>
+<meta name="description" content="Sunset Park Prep (15K821) tech help: announcements and tech tickets.">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  color-scheme:dark;
+  --abyss:#07081a; --dusk:#151236; --pearl:#eef0ff; --pearl-2:#c9ccef; --pearl-3:#8d90b8;
+  --aura:#b9a7ff; --mint:#8ff5d2; --rose:#ff9ec7; --err:#ff8fa8;
+  --f-display:"Instrument Serif","Iowan Old Style","Palatino Linotype",Georgia,serif;
+  --f-body:"Hanken Grotesk","Segoe UI",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:var(--abyss)}
+body{color:var(--pearl);font:400 16px/1.55 var(--f-body);-webkit-font-smoothing:antialiased;overflow-x:hidden;min-height:100vh;min-height:100dvh}
+::selection{background:var(--aura);color:var(--abyss)}
+:focus-visible{outline:2px solid var(--mint);outline-offset:4px}
+
+/* living background */
+.sky{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.sky i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.55;mix-blend-mode:screen;animation:drift 18s ease-in-out infinite alternate}
+.sky i:nth-child(1){width:52vmax;height:52vmax;left:-14vmax;top:-18vmax;background:radial-gradient(circle,rgba(185,167,255,.8),transparent 65%)}
+.sky i:nth-child(2){width:46vmax;height:46vmax;right:-16vmax;top:18vh;background:radial-gradient(circle,rgba(143,245,210,.55),transparent 65%);animation-duration:23s}
+.sky i:nth-child(3){width:40vmax;height:40vmax;left:20vw;bottom:-22vmax;background:radial-gradient(circle,rgba(255,158,199,.45),transparent 65%);animation-duration:27s}
+@keyframes drift{to{transform:translate3d(6vmax,-4vmax,0) scale(1.12)}}
+.sky::after{content:"";position:absolute;inset:0;background-image:radial-gradient(1px 1px at 12% 22%,#fff8,transparent),radial-gradient(1px 1px at 72% 12%,#fff6,transparent),radial-gradient(1px 1px at 42% 68%,#fff5,transparent),radial-gradient(1.5px 1.5px at 86% 76%,#fff7,transparent),radial-gradient(1px 1px at 26% 88%,#fff5,transparent),radial-gradient(1px 1px at 58% 38%,#fff4,transparent);opacity:.8}
+
+.wrap{position:relative;z-index:1;width:min(1120px,100%);margin:0 auto;padding:12px 20px 40px;min-height:calc(100vh - var(--sn-h,0px));min-height:calc(100dvh - var(--sn-h,0px));display:flex;flex-direction:column}
+.top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.mono{font:500 11.5px/1.4 var(--f-mono);letter-spacing:.28em;text-transform:uppercase;color:var(--pearl-3)}
+.brand{display:flex;align-items:center;gap:12px}
+.brand b{width:34px;height:34px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#fff,var(--aura) 55%,var(--mint));box-shadow:0 0 26px rgba(185,167,255,.6);flex:none}
+
+.grid{flex:1;display:grid;grid-template-columns:1.25fr .9fr;gap:28px;align-items:center;padding:6vh 0 4vh}
+h1{margin:18px 0 0;font:400 clamp(44px,6.4vw,86px)/.98 var(--f-display);letter-spacing:-.01em}
+h1 em{font-style:italic;background:linear-gradient(100deg,var(--pearl),var(--aura) 45%,var(--mint));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lede{max-width:40ch;margin:20px 0 0;color:var(--pearl-2);font-size:clamp(16px,1.5vw,19px);font-weight:300}
+
+/* THE big ticket button */
+.ticket-cta{position:relative;display:flex;align-items:center;gap:22px;margin-top:34px;padding:26px 30px 26px 26px;border-radius:26px;text-decoration:none;color:var(--abyss);
+  background:linear-gradient(120deg,#ffffff 0%,var(--pearl) 18%,var(--aura) 58%,var(--mint) 100%);background-size:180% 100%;
+  box-shadow:0 22px 60px -18px rgba(143,245,210,.55),0 0 0 1px rgba(255,255,255,.35) inset,0 -10px 30px rgba(21,18,54,.18) inset;
+  transition:transform .5s var(--ease),box-shadow .5s var(--ease),background-position .8s var(--ease);max-width:600px;isolation:isolate}
+.ticket-cta::before{content:"";position:absolute;inset:-3px;border-radius:29px;z-index:-1;background:conic-gradient(from var(--a,0deg),var(--mint),var(--aura),var(--rose),var(--mint));filter:blur(14px);opacity:.65;animation:halo 6s linear infinite}
+@property --a{syntax:"<angle>";inherits:false;initial-value:0deg}
+@keyframes halo{to{--a:360deg}}
+.ticket-cta:hover{transform:translateY(-4px) scale(1.015);background-position:100% 0;box-shadow:0 30px 80px -18px rgba(185,167,255,.7),0 0 0 1px rgba(255,255,255,.45) inset}
+.ticket-cta:active{transform:translateY(0) scale(.99)}
+.ticket-cta .ic{flex:none;display:grid;place-items:center;width:72px;height:72px;border-radius:20px;background:var(--abyss);color:var(--mint);box-shadow:0 10px 24px rgba(7,8,26,.35)}
+.ticket-cta .ic svg{width:36px;height:36px}
+.ticket-cta .t{display:block;font:700 clamp(26px,2.8vw,34px)/1.05 var(--f-body);letter-spacing:-.015em}
+.ticket-cta .s{display:block;margin-top:6px;font:500 14.5px/1.35 var(--f-body);opacity:.78}
+.ticket-cta .go{margin-left:auto;flex:none;display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:rgba(7,8,26,.9);color:var(--pearl);transition:transform .5s var(--ease)}
+.ticket-cta:hover .go{transform:translateX(5px)}
+.ticket-cta .go svg{width:22px;height:22px}
+.helps{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;max-width:560px}
+.helps span{font:500 12.5px var(--f-body);color:var(--pearl-2);padding:6px 12px;border-radius:99px;border:1px solid rgba(238,240,255,.14);background:rgba(238,240,255,.04)}
+
+/* announcements */
+.ann-list[hidden]{display:none}
+.ann-list{display:flex;flex-direction:column;gap:12px;margin:0 0 34px;max-width:600px}
+.ann{--c:#7fb4ff;position:relative;display:grid;grid-template-columns:auto 1fr;gap:4px 14px;padding:16px 18px 16px 16px;border-radius:18px;
+  background:linear-gradient(135deg,color-mix(in srgb,var(--c) 16%,rgba(21,18,54,.78)),rgba(12,13,36,.7));
+  border:1px solid color-mix(in srgb,var(--c) 38%,transparent);box-shadow:0 18px 40px -24px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.06);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);overflow:hidden}
+.ann::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--c);box-shadow:0 0 18px var(--c)}
+.ann-warning{--c:#ffc27a}.ann-urgent{--c:#ff8fa8}.ann-good{--c:#6ff0b8}
+.ann > *:not(.ann-ic){grid-column:2;min-width:0}
+.ann-ic{grid-column:1;grid-row:1 / span 4;align-self:start;width:38px;height:38px;border-radius:12px;display:grid;place-items:center;color:var(--c);background:color-mix(in srgb,var(--c) 16%,transparent)}
+.ann-ic svg{width:21px;height:21px}
+.ann-urgent .ann-ic{animation:annpulse 2.2s ease-in-out infinite}
+@keyframes annpulse{50%{box-shadow:0 0 0 6px color-mix(in srgb,var(--c) 18%,transparent)}}
+.ann-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.ann-tag{font:500 10.5px/1 var(--f-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--c)}
+.ann-until{font:500 11px/1 var(--f-mono);color:var(--pearl-3)}
+.ann h2{margin:2px 0 0;font:700 17px/1.3 var(--f-body);color:var(--pearl);letter-spacing:-.005em}
+.ann p{margin:2px 0 0;color:var(--pearl-2);font-size:15px;line-height:1.5;white-space:pre-line;overflow-wrap:anywhere}
+.ann-link{justify-self:start;display:inline-flex;align-items:center;gap:6px;margin-top:8px;padding:7px 12px;border-radius:10px;font:600 13.5px var(--f-body);color:var(--abyss);background:var(--c);text-decoration:none;transition:filter .2s,transform .2s}
+.ann-link:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.ann-link svg{width:14px;height:14px}
+
+/* lock card */
+.card{position:relative;padding:30px 28px 26px;border-radius:26px;background:linear-gradient(160deg,rgba(38,34,86,.62),rgba(12,13,36,.72));border:1px solid rgba(238,240,255,.12);
+  box-shadow:0 30px 80px -30px rgba(0,0,0,.8),inset 0 1px 0 rgba(255,255,255,.08);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.card.shake{animation:shake .5s}
+@keyframes shake{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+.lockic{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;background:rgba(185,167,255,.14);color:var(--aura);border:1px solid rgba(185,167,255,.28)}
+.lockic svg{width:26px;height:26px}
+.card h2{margin:18px 0 4px;font:400 34px/1.05 var(--f-display)}
+.card p.sub{margin:0 0 22px;color:var(--pearl-3);font-size:14.5px}
+label.lbl{display:block;font:500 12px var(--f-mono);letter-spacing:.18em;text-transform:uppercase;color:var(--pearl-3);margin-bottom:8px}
+.field{position:relative}
+.field input{width:100%;height:56px;padding:0 54px 0 18px;border-radius:16px;border:1px solid rgba(238,240,255,.18);background:rgba(7,8,26,.55);color:var(--pearl);font:500 18px var(--f-body);letter-spacing:.04em;transition:border-color .3s,box-shadow .3s}
+.field input::placeholder{color:#6b6e96;letter-spacing:0}
+.field input:focus{outline:none;border-color:var(--mint);box-shadow:0 0 0 4px rgba(143,245,210,.16)}
+.card.bad .field input{border-color:var(--err);box-shadow:0 0 0 4px rgba(255,143,168,.14)}
+.eye{position:absolute;right:8px;top:8px;width:40px;height:40px;border:0;border-radius:12px;background:none;color:var(--pearl-3);cursor:pointer;display:grid;place-items:center}
+.eye:hover{color:var(--pearl);background:rgba(238,240,255,.07)}
+.eye svg{width:20px;height:20px}
+.msg{min-height:22px;margin:10px 2px 0;font-size:14px;color:var(--err)}
+.msg.ok{color:var(--mint)}
+.unlock{width:100%;height:54px;margin-top:8px;border:0;border-radius:16px;cursor:pointer;font:600 16.5px var(--f-body);color:var(--pearl);
+  background:linear-gradient(120deg,#3a2f8f,#5a47c9 55%,#2d8f7a);box-shadow:0 12px 30px -12px rgba(90,71,201,.8);transition:transform .35s var(--ease),filter .35s,box-shadow .35s;display:flex;align-items:center;justify-content:center;gap:10px}
+.unlock:hover{transform:translateY(-2px);filter:brightness(1.12);box-shadow:0 18px 40px -14px rgba(143,245,210,.55)}
+.unlock[disabled]{opacity:.7;cursor:progress;transform:none}
+a.unlock{text-decoration:none}
+.staff-card .unlock{margin-top:4px}
+.spin{width:18px;height:18px;border-radius:50%;border:2px solid rgba(255,255,255,.35);border-top-color:#fff;animation:rot .8s linear infinite;display:none}
+.busy .spin{display:block}
+@keyframes rot{to{transform:rotate(360deg)}}
+.fine{margin:16px 2px 0;font-size:13px;color:var(--pearl-3);display:flex;gap:8px;align-items:flex-start}
+.fine svg{flex:none;width:16px;height:16px;margin-top:2px;color:var(--mint)}
+.foot{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;font:400 12.5px/1.6 var(--f-mono);color:var(--pearl-3);padding-top:18px;border-top:1px solid rgba(238,240,255,.08)}
+.toast{position:fixed;left:50%;bottom:24px;z-index:5;transform:translate(-50%,180%);padding:10px 16px;border-radius:99px;background:rgba(21,18,54,.92);border:1px solid rgba(143,245,210,.35);font-size:14px;color:var(--pearl);transition:transform .6s var(--ease)}
+.toast.on{transform:translate(-50%,0)}
+
+/* entrance */
+.rise{opacity:0;transform:translateY(18px);animation:rise 1s var(--ease) forwards}
+.rise.d1{animation-delay:.08s}.rise.d2{animation-delay:.18s}.rise.d3{animation-delay:.3s}.rise.d4{animation-delay:.42s}
+@keyframes rise{to{opacity:1;transform:none}}
+
+@media (max-width:860px){
+  .grid{grid-template-columns:1fr;gap:34px;padding-top:4vh}
+  .ticket-cta{padding:22px 20px 22px 18px;gap:16px}
+  .ticket-cta .ic{width:60px;height:60px;border-radius:18px}
+  .ticket-cta .go{display:none}
+  .foot{justify-content:flex-start}
+  .ann-list{margin-bottom:26px}
+  .ann{padding:14px 14px 14px 14px;gap:4px 12px}
+  .ann-ic{width:34px;height:34px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rise{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<!-- ═════════════ Site navigation · shared by every page (Code.gs → siteNav_) ═════════════ -->
+<style>
+/* ── Step 3 · CSS ── everything is prefixed "sn-" so it never clashes with a page's own styles */
+:root{--sn-h:64px}
+.sn-skip{position:fixed;left:12px;top:-60px;z-index:100;padding:10px 16px;border-radius:10px;background:#8ff5d2;color:#07081a;font:600 14px/1 "Hanken Grotesk","Segoe UI",system-ui,sans-serif;text-decoration:none;transition:top .2s}
+.sn-skip:focus{top:10px;outline:3px solid #fff;outline-offset:2px}
+
+.sn{position:sticky;top:0;z-index:70;height:var(--sn-h);font-family:"Hanken Grotesk","Segoe UI",system-ui,sans-serif;color:#eef0ff;
+  background:rgba(9,10,32,.78);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);
+  border-bottom:1px solid rgba(238,240,255,.08);transition:background .3s,box-shadow .3s,height .3s}
+.sn.sn-scrolled{background:rgba(9,10,32,.94);box-shadow:0 10px 30px -18px rgba(0,0,0,.8)}
+.sn-in{height:100%;width:min(1240px,100%);margin:0 auto;padding:0 max(16px,env(safe-area-inset-left));display:flex;align-items:center;gap:20px}
+.sn a{color:inherit;text-decoration:none}
+.sn :focus-visible{outline:2px solid #8ff5d2;outline-offset:3px;border-radius:10px}
+
+/* brand */
+.sn-brand{display:flex;align-items:center;gap:10px;margin-right:auto;min-width:0;padding:6px 4px}
+.sn-mark{flex:none;width:32px;height:32px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#fff,#b9a7ff 55%,#8ff5d2);box-shadow:0 0 18px rgba(185,167,255,.55)}
+.sn-brand b{display:block;font-weight:700;font-size:15.5px;letter-spacing:-.01em;white-space:nowrap}
+.sn-brand small{display:block;font:500 10.5px/1.2 "IBM Plex Mono",ui-monospace,Menlo,monospace;letter-spacing:.16em;text-transform:uppercase;color:#a9acd3;white-space:nowrap}
+
+/* links */
+.sn-links{display:flex;align-items:center;gap:6px;list-style:none;margin:0;padding:0}
+.sn-link{position:relative;display:inline-flex;align-items:center;gap:8px;height:42px;padding:0 14px;border-radius:12px;font-weight:600;font-size:15px;color:#c9ccef;
+  transition:color .2s,background .2s}
+.sn-link svg{width:18px;height:18px;flex:none}
+.sn-link::after{content:"";position:absolute;left:14px;right:14px;bottom:5px;height:2px;border-radius:2px;background:linear-gradient(90deg,#8ff5d2,#b9a7ff);transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(.16,1,.3,1)}
+.sn-link:hover{color:#fff;background:rgba(238,240,255,.07)}
+.sn-link:hover::after{transform:scaleX(.5)}
+.sn-link[aria-current="page"]{color:#fff}
+.sn-link[aria-current="page"]::after{transform:scaleX(1)}
+.sn-lock{width:13px!important;height:13px!important;opacity:.7}
+.sn-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* primary action: Tech Ticket */
+.sn-cta{display:inline-flex;align-items:center;gap:8px;height:42px;padding:0 18px 0 14px;border-radius:12px;font-weight:700;font-size:15px;color:#07081a!important;
+  background:linear-gradient(120deg,#ffffff,#b9a7ff 60%,#8ff5d2);box-shadow:0 8px 22px -10px rgba(143,245,210,.7),inset 0 0 0 1px rgba(255,255,255,.4);
+  transition:transform .25s,box-shadow .25s,filter .25s}
+.sn-cta svg{width:18px;height:18px}
+.sn-cta:hover{transform:translateY(-1px);filter:brightness(1.05);box-shadow:0 12px 28px -10px rgba(185,167,255,.85),inset 0 0 0 1px rgba(255,255,255,.55)}
+.sn-cta[aria-current="page"]{box-shadow:0 0 0 2px #09091f,0 0 0 4px #8ff5d2}
+
+/* hamburger */
+.sn-toggle{display:none;flex:none;width:46px;height:46px;border:1px solid rgba(238,240,255,.16);border-radius:12px;background:rgba(238,240,255,.05);color:#eef0ff;cursor:pointer;place-items:center}
+.sn-toggle:hover{background:rgba(238,240,255,.1)}
+.sn-bars{position:relative;width:20px;height:14px}
+.sn-bars i{position:absolute;left:0;right:0;height:2px;border-radius:2px;background:currentColor;transition:transform .3s cubic-bezier(.16,1,.3,1),opacity .2s,top .3s}
+.sn-bars i:nth-child(1){top:0}.sn-bars i:nth-child(2){top:6px}.sn-bars i:nth-child(3){top:12px}
+.sn-toggle[aria-expanded="true"] .sn-bars i:nth-child(1){top:6px;transform:rotate(45deg)}
+.sn-toggle[aria-expanded="true"] .sn-bars i:nth-child(2){opacity:0}
+.sn-toggle[aria-expanded="true"] .sn-bars i:nth-child(3){top:6px;transform:rotate(-45deg)}
+
+/* the Tech Desk page: keep its own sidebar + toolbar just under the site bar */
+html.sn-on body{height:auto;min-height:100%;margin:0}
+@media (min-width:781px){html.sn-on .app > .side{top:var(--sn-h);height:calc(100vh - var(--sn-h))}}
+html.sn-on .main > .top{top:var(--sn-h)}
+/* the ticket page: its progress bar docks under the site bar */
+html.sn-on .progress{top:var(--sn-h)}
+
+/* ── responsive: hamburger at tablet-portrait and below ── */
+@media (max-width:760px){
+  :root{--sn-h:60px}
+  .sn-brand small{display:none}
+  .sn-toggle{display:grid}
+  .sn-panel{position:absolute;left:0;right:0;top:100%;padding:10px 16px 18px;background:rgba(9,10,32,.98);border-bottom:1px solid rgba(238,240,255,.1);
+    box-shadow:0 24px 40px -20px rgba(0,0,0,.9);transform-origin:top;transition:opacity .25s,transform .3s cubic-bezier(.16,1,.3,1),visibility 0s .3s;
+    opacity:0;transform:translateY(-8px) scaleY(.98);visibility:hidden}
+  .sn.sn-open .sn-panel{opacity:1;transform:none;visibility:visible;transition:opacity .25s,transform .3s cubic-bezier(.16,1,.3,1),visibility 0s}
+  .sn-links{flex-direction:column;align-items:stretch;gap:4px}
+  .sn-link{display:flex;height:54px;font-size:17px;padding:0 16px}
+  .sn-link::after{left:0;right:auto;top:12px;bottom:12px;width:3px;height:auto;transform:scaleY(0);transform-origin:top}
+  .sn-link[aria-current="page"]{background:rgba(238,240,255,.06)}
+  .sn-link[aria-current="page"]::after{transform:scaleY(1)}
+  .sn-link:hover::after{transform:scaleY(.5)}
+  .sn-cta{height:56px;justify-content:center;font-size:17px;margin-top:8px;width:100%}
+}
+@media (min-width:761px){.sn-panel{display:flex;align-items:center}}
+@media (prefers-reduced-motion:reduce){.sn,.sn *{transition:none!important}}
+@media (forced-colors:active){.sn-cta,.sn-link[aria-current="page"]{border:2px solid LinkText}}
+</style>
+
+<!-- ── Step 2 · HTML ── -->
+<a class="sn-skip" href="#" id="snSkip">Skip to main content</a>
+<header class="sn" id="sn" data-active="home">
+  <div class="sn-in">
+    <a class="sn-brand" href="help.html" data-sn-go aria-label="Leon Technology, 15K821, home">
+      <span class="sn-mark" aria-hidden="true"></span>
+      <span><b>Leon · Technology</b><small>Sunset Park Prep · 15K821</small></span>
+    </a>
+
+    <button class="sn-toggle" id="snToggle" type="button" aria-expanded="false" aria-controls="snPanel" aria-label="Open menu">
+      <span class="sn-bars" aria-hidden="true"><i></i><i></i><i></i></span>
+    </button>
+
+    <nav class="sn-panel" id="snPanel" aria-label="Main">
+      <ul class="sn-links">
+        <li><a class="sn-link" href="help.html" data-sn-go data-sn="home">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></svg>Home</a></li>
+        <li><a class="sn-link" href="index.html" data-sn-go data-sn="desk">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>Tech Desk<svg class="sn-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span class="sn-sr"> (password required)</span></a></li>
+        <li><a class="sn-cta" href="ticket.html" data-sn-go data-sn="ticket">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9V6.5A1.5 1.5 0 0 1 4.5 5h15A1.5 1.5 0 0 1 21 6.5V9a3 3 0 0 0 0 6v2.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5V15a3 3 0 0 0 0-6Z"/><path d="M9 9.5h6M9 12h6"/></svg>Tech Ticket</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- ── Step 4 · JavaScript ── menu toggle, active page, scroll shadow, links that leave the Apps Script frame -->
+<script>
+(function () {
+  var doc = document.documentElement, sn = document.getElementById('sn'), btn = document.getElementById('snToggle'), panel = document.getElementById('snPanel');
+  if (!sn) return;
+  doc.classList.add('sn-on');
+
+  // Active page
+  var active = sn.getAttribute('data-active');
+  var cur = sn.querySelector('[data-sn="' + active + '"]');
+  if (cur) cur.setAttribute('aria-current', 'page');
+
+  // Mobile menu
+  var mq = window.matchMedia('(max-width:760px)');
+  function links() { return panel.querySelectorAll('a'); }
+  function setOpen(open, focusBack) {
+    sn.classList.toggle('sn-open', open);
+    btn.setAttribute('aria-expanded', String(open));
+    btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    if (open) { var f = links()[0]; if (f) setTimeout(function () { f.focus(); }, 60); }
+    else if (focusBack) btn.focus();
+  }
+  btn.addEventListener('click', function () { setOpen(btn.getAttribute('aria-expanded') !== 'true'); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && sn.classList.contains('sn-open')) { setOpen(false, true); return; }
+    // keep Tab inside the open menu (toggle + links)
+    if (e.key === 'Tab' && sn.classList.contains('sn-open') && mq.matches) {
+      var items = [btn].concat([].slice.call(links())), first = items[0], last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
+  document.addEventListener('click', function (e) { if (sn.classList.contains('sn-open') && !sn.contains(e.target)) setOpen(false); });
+  (mq.addEventListener ? mq.addEventListener.bind(mq, 'change') : mq.addListener.bind(mq))(function () { if (!mq.matches) setOpen(false); });
+
+  // Links open in the same tab even though Apps Script pages run inside a frame
+  sn.querySelectorAll('[data-sn-go]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var url = a.getAttribute('href');
+      if (!url || url.charAt(0) === '#') return;
+      e.preventDefault(); e.stopPropagation();
+      setOpen(false);
+      try { window.top.location.href = url; } catch (err) { window.open(url, '_blank'); }
+    });
+  });
+
+  // Skip link → the page's <main>
+  document.getElementById('snSkip').addEventListener('click', function (e) {
+    e.preventDefault();
+    var m = document.querySelector('main');
+    if (!m) return;
+    if (!m.hasAttribute('tabindex')) m.setAttribute('tabindex', '-1');
+    m.focus(); m.scrollIntoView();
+  });
+
+  // Deeper shadow once the page scrolls
+  function onScroll() { sn.classList.toggle('sn-scrolled', window.scrollY > 8); }
+  window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+})();
+</script>
+<!-- ═════════════ end site navigation ═════════════ -->
+
+<div class="sky" aria-hidden="true"><i></i><i></i><i></i></div>
+
+<div class="wrap">
+  <main class="grid">
+    <section>
+      <div class="ann-list rise" id="anns" role="region" aria-label="Announcements" hidden></div>
+      <div class="mono rise d1">Staff · Need tech help?</div>
+      <h1 class="rise d1">Something not <em>working?</em></h1>
+      <p class="lede rise d2">Send Leon a ticket. It takes about a minute, and it lands on his desk right away.</p>
+
+      <a class="ticket-cta rise d3" id="ticketBtn" href="ticket.html">
+        <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9V6.5A1.5 1.5 0 0 1 4.5 5h15A1.5 1.5 0 0 1 21 6.5V9a3 3 0 0 0 0 6v2.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5V15a3 3 0 0 0 0-6Z"/><path d="M9 9.5h6M9 12h6M9 14.5h3.5"/></svg></span>
+        <span><span class="t">Submit a Tech Ticket</span><span class="s">For all staff · No password needed</span></span>
+        <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <div class="helps rise d4" aria-label="Common requests"><span>Smartboards</span><span>Chromebooks</span><span>Logins</span><span>Printers</span><span>Wi-Fi</span><span>Testing &amp; AT</span></div>
+    </section>
+
+    <section class="card staff-card rise d3" aria-labelledby="deskTitle">
+      <div class="lockic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10.5" width="15" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15.5" r="1.3"/></svg></div>
+      <h2 id="deskTitle">Tech Desk</h2>
+      <p class="sub">For the tech team only. Staff don't need this; use the ticket button to get help.</p>
+      <a class="unlock" id="deskLink" href="index.html">Open the Tech Desk</a>
+      <div class="fine"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v5c0 4.5 3 8.3 7 10 4-1.7 7-5.5 7-10V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></svg><span>Asks for the Tech Desk password.</span></div>
+    </section>
+  </main>
+
+  <footer class="foot rise d4"><span>Leon · Technology Manager</span><span>Leon@sunsetparkprep.com</span><span>(718) 840-1951</span><span style="opacity:.5">v4</span></footer>
+</div>
+
+<script>
+// ═══ Tech help site settings ═══
+// STAFF link: the Apps Script deployment with "Who has access: Anyone". Tickets and announcements go through it.
+// ADMIN link: your own Tech Desk link (the "Leon Admin" deployment).
+window.TD = {
+  API: 'https://script.google.com/macros/s/AKfycbyHAgpkEbCArS-dD_M4n9XyVM04ZhA_EjCddF_DIbmrPEXp5GjAD-2zjZbnKeXIwRxj/exec',
+  ADMIN: 'https://script.google.com/macros/s/AKfycbwE1vTRqIq9RxW-4KjBXBfvKfHBWTUSVwtIuzx7A9eq2YzI-vdNH1ETvvqnQ2PQ_DTU/exec',
+  OWNER_EMAIL: 'Leon@sunsetparkprep.com'
+};
+
+// Shared helper: talk to the Tech Desk without sending any Google sign-in (so it works in every browser).
+window.TD.call = function (opts) {
+  return fetch(window.TD.API + (opts.query || ''), {
+    method: opts.body ? 'POST' : 'GET', credentials: 'omit', redirect: 'follow',
+    headers: opts.body ? { 'Content-Type': 'text/plain;charset=utf-8' } : undefined,
+    body: opts.body ? JSON.stringify(opts.body) : undefined
+  }).then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); });
+};
+
+// Point every Tech Desk link at the admin link.
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('[data-admin]').forEach(function (a) { a.setAttribute('href', 'index.html'); });
+});
+</script>
+<script>
+(function () {
+  'use strict';
+  var ICON = {
+    info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.5h.01"/>',
+    warning: '<path d="M10.3 3.9 2.4 17.5A2 2 0 0 0 4.1 20.5h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4M12 17h.01"/>',
+    urgent: '<path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/>',
+    good: '<circle cx="12" cy="12" r="9"/><path d="m8 12.5 2.7 2.7L16 10"/>'
+  };
+  function el(tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; }
+  var box = document.getElementById('anns');
+  window.TD.call({ query: '?api=announcements' }).then(function (res) {
+    var list = (res && res.announcements) || [];
+    list.forEach(function (a) {
+      var style = ICON[a.style] ? a.style : 'info';
+      var card = el('article', 'ann ann-' + style);
+      if (style === 'urgent') card.setAttribute('role', 'alert');
+      var ic = el('span', 'ann-ic'); ic.setAttribute('aria-hidden', 'true');
+      ic.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + ICON[style] + '</svg>';
+      card.appendChild(ic);
+      var top = el('div', 'ann-top'); top.appendChild(el('span', 'ann-tag', a.tag || 'Announcement'));
+      if (a.until) top.appendChild(el('span', 'ann-until', 'Until ' + a.until));
+      card.appendChild(top);
+      if (a.title) card.appendChild(el('h2', '', a.title));
+      if (a.message) card.appendChild(el('p', '', a.message));
+      if (a.link && /^https?:\/\//i.test(a.link)) {
+        var l = el('a', 'ann-link', 'Learn more'); l.href = a.link; l.target = '_blank'; l.rel = 'noopener';
+        l.insertAdjacentHTML('beforeend', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>');
+        card.appendChild(l);
+      }
+      box.appendChild(card);
+    });
+    box.hidden = !list.length;
+    report('OK: ' + list.length + ' announcement(s) received.');
+  }).catch(function (err) { box.hidden = true; report('Could not load announcements: ' + (err && err.message ? err.message : err)); });
+
+  // Add ?check to the end of the site address to see what the page receives (for Leon).
+  function report(msg) {
+    if (!/[?&]check\b/.test(location.search)) return;
+    var d = document.createElement('pre');
+    d.style.cssText = 'position:fixed;left:12px;right:12px;bottom:12px;z-index:99;margin:0;padding:12px 14px;border-radius:12px;background:#fff;color:#141733;font:13px/1.5 monospace;white-space:pre-wrap;box-shadow:0 10px 30px rgba(0,0,0,.5)';
+    d.textContent = 'Site version: 4\nAPI: ' + window.TD.API + '\n' + msg;
+    document.body.appendChild(d);
+  }
+})();
+</script>
+</body>
+</html>
